@@ -50,7 +50,3 @@ body {
 .keys button:hover {
     background-color: #ccc;
 }
-
-#clear {
-    grid-column: span 2;
-}

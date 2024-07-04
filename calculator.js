@@ -3,7 +3,9 @@ let firstOperand = null;
 let currentOperator = null;
 let shouldResetDisplay = false;
 let activeOperatorButton = null;
+
 const decimalButton = document.getElementById('decimal');
+const operatorButtons = document.querySelectorAll('.operator')
 
 
 function appendToDisplay(value) {
@@ -29,10 +31,12 @@ function clearDisplay(){
     firstOperand = null;
     currentOperator = null;
     shouldResetDisplay = false;
+    removeActiveOperator();
+    enableOperatorButtons();
     decimalButton.disabled = false;
 }
 
-function handleOperator(operator){
+function handleOperator(operator, buttonId){
     if (firstOperand === null){
         firstOperand = parseFloat(display.value);
     } else if (!shouldResetDisplay){
@@ -41,6 +45,7 @@ function handleOperator(operator){
     }
     currentOperator = operator;
     shouldResetDisplay = true;
+    selectedOperator(buttonId)
 }
 
 
@@ -107,6 +112,46 @@ function convertPercentage(){
     display.value = parseFloat(display.value) / 100;
 }
 
+function backspace(){
+    if (display.value.length > 0){
+        display.value = display.value.slice(0, -1);
+    }
+}
+
+// select Operator
+function selectedOperator(buttonId){
+    if(activeOperatorButton){
+        activeOperatorButton.style.opacity = '';
+    }
+    const button = document.getElementById(buttonId);
+    button.style.opacity = '0.9';
+    activeOperatorButton = button;
+}
+
+// Remove opacity
+function removeActiveOperator(){
+    if(activeOperatorButton){
+        activeOperatorButton.style.opacity = ''; //Reset
+        activeOperationButton = null;
+    }
+}
+
+// Disable all operator button except the one with the provided buttonId
+function disableOperatorButtonExcept(buttonId){
+    operatorButtons.forEach(button => {
+        if (button.id !== buttonId){
+            button.disabled = true;
+        }
+    });
+}
+
+// Enable all operator buttons
+function enableOperatorButtons(){
+    operatorButtons.forEach(button => {
+        button.disabled = false;
+    });
+}
+
 // Attach event listeners 
 document.addEventListener('DOMContentLoaded', function(){
     // numbers event Listener
@@ -115,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     // operator eventListener
     document.querySelectorAll('.operator').forEach(button => {
-        button.addEventListener('click', () =>handleOperator(button.innerText));
+        button.addEventListener('click', () =>handleOperator(button.innerText, button.id));
     });
 
     // clear eventListener
@@ -132,4 +177,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // decimal button
     decimalButton.addEventListener('click', appendDecimal);
+
+    // backspace button
+    document.getElementById('backspace').addEventListener('click', backspace);
 })
