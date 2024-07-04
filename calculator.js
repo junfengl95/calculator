@@ -40,7 +40,6 @@ function handleOperator(operator, buttonId){
         firstOperand = parseFloat(display.value);
     } else if (!shouldResetDisplay){
         calculateResult(); // calculate result before the next operator
-        firstOperand = parseFloat.value;
     }
     currentOperator = operator;
     shouldResetDisplay = true;
@@ -61,7 +60,7 @@ function calculateResult(){
 
     let secondOperand = parseFloat(display.value);
     
-    result = operate(currentOperator, firstOperand, secondOperand);
+    let result = operate(currentOperator, firstOperand, secondOperand);
     
     display.value = result;
     firstOperand = result;
