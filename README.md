@@ -1,7 +1,7 @@
-## JavaScript Calculator
+# JavaScript Calculator
 This project is a basic calculator implemented using HTML, CSS, and JavaScript. It provides functionality for performing arithmetic operations such as addition, subtraction, multiplication, and division, along with additional features like percentage calculation and changing sign.
 
-## Features
+# Features
 - Addition (+), Subtraction (-), Multiplication (*), and Division (/) operations.
 - Decimal point (.) support.
 - Percentage calculation (%).
@@ -11,13 +11,15 @@ This project is a basic calculator implemented using HTML, CSS, and JavaScript. 
 - Direct calculation upon clicking an operator after entering the first operand and an operator.
 - Operator button highlighting when selected.
 
-## Usage
+# Usage
 To use the calculator:
 
 Clone or download the repository to your local machine.
-Open index.html in a web browser.
+Open calculator.html in a web browser.
 
-## How to Use
+Click on the link to view the Github Page of [Calculator](https://junfengl95.github.io/calculator/calculator.html)
+
+# How to Use
 - Number Buttons: Click on any number button to append that number to the display.
 - Decimal Button: Click on the decimal button (.) to add a decimal point to the displayed number.
 - Operator Buttons: Click on an operator button (+, -, *, /) to select the operation. Clicking another operator will calculate the result using the current operator and operand.
