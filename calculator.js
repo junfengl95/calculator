@@ -32,7 +32,6 @@ function clearDisplay(){
     currentOperator = null;
     shouldResetDisplay = false;
     removeActiveOperator();
-    enableOperatorButtons();
     decimalButton.disabled = false;
 }
 
@@ -68,6 +67,7 @@ function calculateResult(){
     firstOperand = result;
     currentOperator = null;
     shouldResetDisplay = true;
+    removeActiveOperator();
     decimalButton.disabled = false;
 }
 
@@ -119,37 +119,24 @@ function backspace(){
 }
 
 // select Operator
-function selectedOperator(buttonId){
-    if(activeOperatorButton){
-        activeOperatorButton.style.opacity = '';
-    }
+function selectedOperator(buttonId){    
     const button = document.getElementById(buttonId);
-    button.style.opacity = '0.9';
+
+    // Remove active state from all operators
+    operatorButtons.forEach(btn => {
+        btn.classList.remove('selected')
+    });
+    // Add active state to clicked operation btn
+    button.classList.add('selected');
     activeOperatorButton = button;
 }
 
 // Remove opacity
 function removeActiveOperator(){
     if(activeOperatorButton){
-        activeOperatorButton.style.opacity = ''; //Reset
+        activeOperatorButton.classList.remove('selected');
         activeOperationButton = null;
     }
-}
-
-// Disable all operator button except the one with the provided buttonId
-function disableOperatorButtonExcept(buttonId){
-    operatorButtons.forEach(button => {
-        if (button.id !== buttonId){
-            button.disabled = true;
-        }
-    });
-}
-
-// Enable all operator buttons
-function enableOperatorButtons(){
-    operatorButtons.forEach(button => {
-        button.disabled = false;
-    });
 }
 
 // Attach event listeners 
@@ -158,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll('.number').forEach(button => {
         button.addEventListener('click', () => appendToDisplay(button.innerText));
     });
+
     // operator eventListener
     document.querySelectorAll('.operator').forEach(button => {
         button.addEventListener('click', () =>handleOperator(button.innerText, button.id));
@@ -180,4 +168,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // backspace button
     document.getElementById('backspace').addEventListener('click', backspace);
+
+    // Direct calculation on operator click
+    operatorButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (firstOperand !== null && currentOperator !== null && shouldResetDisplay === false){
+                calculateResult();
+            }
+        })
+    })
 })

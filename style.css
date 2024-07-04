@@ -5,6 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    font-size: large;
 }
 
 .calculator {
@@ -45,8 +46,25 @@ body {
     border: none;
     background-color: #e0e0e0;
     border-radius: 5px;
+    transition: opacity 0.2s ease;
 }
 
 .keys button:hover {
     background-color: #ccc;
+}
+
+.keys button.operator.selected {
+    opacity: 0.5;
+}
+
+#clear, #sign, #percent, #backspace {
+    background-color: bisque;
+}
+
+.keys button.operator {
+    background-color: cadetblue;
+}
+
+button.number, #decimal, #equal {
+    background-color: aliceblue;
 }
