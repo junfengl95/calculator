@@ -51,6 +51,6 @@ body {
     background-color: #ccc;
 }
 
-.clear {
+#clear {
     grid-column: span 2;
 }
